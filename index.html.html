@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thrive — Teen Health & Wellness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:    #4a90c4;
+      --mint:    #d6eaf8;
+      --peach:   #dce8f0;
+      --sky:     #b8d8ee;
+      --lavender:#ccdff0;
+      --cream:   #f4f7fb;
+      --warm:    #1a3a52;
+      --text:    #2c3e50;
+      --muted:   #6b8299;
+      --card-bg: #ffffff;
+      --radius:  20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(244,247,251,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(74,144,196,0.15);
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--sage);
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--warm); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--text);
+      font-size: 0.9rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--sage); }
+    .nav-cta {
+      background: var(--sage); color: white;
+      border: none; padding: .55rem 1.3rem;
+      border-radius: 50px; font-size: 0.85rem;
+      font-weight: 500; cursor: pointer;
+      transition: background .2s, transform .15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .nav-cta:hover { background: #3a7db0; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 3rem;
+      padding: 4rem 5vw;
+      position: relative;
+      overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center top;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(244,247,251,0.93) 0%,
+        rgba(214,234,248,0.85) 40%,
+        rgba(184,216,238,0.6) 70%,
+        rgba(184,216,238,0.3) 100%
+      );
+      z-index: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -80px;
+      width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(214,234,248,0.45) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 10s ease-in-out infinite reverse;
+      z-index: 0;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%       { transform: translateY(-20px) scale(1.03); }
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; justify-content: center; align-items: center;
+      animation: fadeUp 1s ease .2s both;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: var(--mint); color: var(--sage);
+      padding: .4rem 1rem; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 500;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .8s ease both;
+    }
+    .hero-badge::before { content: '💙'; font-size: 0.9rem; }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      font-weight: 700;
+      color: var(--warm);
+      margin-bottom: 1.2rem;
+      animation: fadeUp .9s ease .1s both;
+    }
+    h1 em { font-style: italic; color: var(--sage); }
+
+    .hero-sub {
+      font-size: 1.1rem; color: var(--muted);
+      line-height: 1.7; max-width: 480px;
+      margin-bottom: 2rem;
+      animation: fadeUp 1s ease .2s both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 1s ease .3s both;
+    }
+    .btn-primary {
+      background: var(--sage); color: white;
+      padding: .85rem 2rem; border-radius: 50px;
+      text-decoration: none; font-weight: 500;
+      transition: all .2s;
+    }
+    .btn-primary:hover { background: #3a7db0; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(74,144,196,0.4); }
+    .btn-secondary {
+      background: transparent; color: var(--warm);
+      padding: .85rem 2rem; border-radius: 50px;
+      text-decoration: none; font-weight: 500;
+      border: 2px solid rgba(26,58,82,0.2);
+      transition: all .2s;
+    }
+    .btn-secondary:hover { border-color: var(--sage); color: var(--sage); }
+
+    /* hero visual */
+    .hero-card-stack {
+      position: relative; width: 320px; height: 380px;
+    }
+    .hcard {
+      position: absolute;
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    .hcard:nth-child(1) {
+      width: 260px; top: 0; left: 30px;
+      background: var(--mint);
+      transform: rotate(-3deg);
+      animation: cardFloat1 6s ease-in-out infinite;
+    }
+    .hcard:nth-child(2) {
+      width: 260px; top: 90px; left: 0;
+      background: white;
+      transform: rotate(2deg);
+      animation: cardFloat2 7s ease-in-out infinite;
+    }
+    .hcard:nth-child(3) {
+      width: 240px; top: 200px; left: 50px;
+      background: #eaf3fb;
+      transform: rotate(-1deg);
+      animation: cardFloat1 8s ease-in-out infinite reverse;
+    }
+    @keyframes cardFloat1 {
+      0%,100% { transform: rotate(-3deg) translateY(0); }
+      50%      { transform: rotate(-3deg) translateY(-8px); }
+    }
+    @keyframes cardFloat2 {
+      0%,100% { transform: rotate(2deg) translateY(0); }
+      50%      { transform: rotate(2deg) translateY(-6px); }
+    }
+    .hcard-label { font-size: 0.72rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .4rem; }
+    .hcard-title { font-family: 'Fraunces', serif; font-size: 1rem; color: var(--warm); }
+    .hcard-icon { font-size: 1.8rem; margin-bottom: .5rem; }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 5rem 5vw; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 500; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--sage);
+      margin-bottom: .7rem;
+    }
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700; color: var(--warm);
+      line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 1rem;
+      line-height: 1.7; max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── TOPICS GRID ── */
+    #topics { background: white; }
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .topic-card {
+      border-radius: var(--radius);
+      padding: 2rem;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .topic-card::after {
+      content: '→';
+      position: absolute; bottom: 1.5rem; right: 1.5rem;
+      font-size: 1.2rem; opacity: 0;
+      transition: opacity .2s, transform .2s;
+    }
+    .topic-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+    .topic-card:hover::after { opacity: 1; transform: translateX(4px); }
+    .tc-physical { background: #daeaf6; }
+    .tc-mental   { background: #e0e8f5; }
+    .tc-coping   { background: #ddf0f5; }
+    .tc-sleep    { background: #e8eef7; }
+    .tc-nutrition{ background: #e4ecf5; }
+    .tc-social   { background: #d8e8f5; }
+    .topic-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .topic-card h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; color: var(--warm); margin-bottom: .5rem; }
+    .topic-card p  { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── MENTAL HEALTH SECTION ── */
+    #mental { background: var(--cream); }
+    .mental-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .mental-facts { display: flex; flex-direction: column; gap: 1.2rem; }
+    .fact-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.4rem 1.6rem;
+      border-left: 4px solid var(--sage);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .fact-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(74,144,196,0.15); }
+    .fact-card.peach { border-color: #5b9ec9; }
+    .fact-card.sky   { border-color: #3a7db0; }
+    .fact-card.lav   { border-color: #7aadd4; }
+    .fact-card h4 { font-family: 'Fraunces', serif; font-size: 1rem; color: var(--warm); margin-bottom: .4rem; }
+    .fact-card p  { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    .coping-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .coping-chip {
+      background: white;
+      border-radius: 14px; padding: 1.1rem 1.3rem;
+      display: flex; align-items: center; gap: .8rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      font-size: 0.88rem; font-weight: 500; color: var(--text);
+      transition: transform .2s, box-shadow .2s, background .2s;
+      cursor: pointer;
+    }
+    .coping-chip:hover { transform: translateY(-2px); background: var(--mint); box-shadow: 0 8px 20px rgba(74,144,196,0.15); }
+    .chip-icon { font-size: 1.4rem; }
+
+    /* ── BODY BASICS ── */
+    #body { background: white; }
+    .body-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .body-card {
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: #eef4fa;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+    }
+    .body-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(74,144,196,0.15); }
+    .body-card .b-icon { font-size: 2.8rem; margin-bottom: 1rem; }
+    .body-card h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--warm); margin-bottom: .5rem; }
+    .body-card p  { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .body-card .b-pill {
+      display: inline-block; margin-top: .8rem;
+      background: var(--mint); color: var(--sage);
+      padding: .25rem .75rem; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 500;
+    }
+
+    /* ── RESOURCES ── */
+    #resources { background: var(--cream); }
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .resource-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .resource-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+    .r-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--mint); color: var(--sage);
+      padding: .3rem .8rem; border-radius: 50px;
+      font-size: 0.75rem; font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .resource-card h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; color: var(--warm); margin-bottom: .5rem; }
+    .resource-card p  { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .r-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: var(--sage); font-size: 0.85rem; font-weight: 500;
+      text-decoration: none;
+    }
+    .r-link:hover { text-decoration: underline; }
+
+    /* ── CRISIS BANNER ── */
+    .crisis-banner {
+      background: linear-gradient(135deg, #1a3a52 0%, #2a5a7a 100%);
+      color: white;
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .crisis-icon { font-size: 2.5rem; flex-shrink: 0; }
+    .crisis-text h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: .4rem; }
+    .crisis-text p  { font-size: 0.9rem; opacity: .8; line-height: 1.6; }
+    .crisis-btn {
+      margin-left: auto;
+      background: white; color: var(--warm);
+      padding: .8rem 1.8rem; border-radius: 50px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; white-space: nowrap;
+      transition: transform .2s;
+    }
+    .crisis-btn:hover { transform: scale(1.04); }
+
+    /* ── TIPS TICKER ── */
+    .ticker-wrap {
+      background: var(--sage);
+      overflow: hidden; padding: .65rem 0;
+    }
+    .ticker {
+      display: flex; gap: 4rem;
+      animation: ticker 30s linear infinite;
+      width: max-content;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: flex; align-items: center; gap: .6rem;
+      color: white; font-size: 0.85rem; white-space: nowrap;
+    }
+    .ticker-dot { width: 5px; height: 5px; background: rgba(255,255,255,0.5); border-radius: 50%; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a3a52;
+      color: rgba(255,255,255,0.7);
+      padding: 3rem 5vw;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+    .footer-brand .nav-logo { color: #a8d4f0; margin-bottom: .8rem; display: block; }
+    .footer-brand p { font-size: 0.85rem; line-height: 1.7; }
+    footer h4 { color: white; font-family: 'Fraunces', serif; font-size: 1rem; margin-bottom: 1rem; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    footer ul a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
+    footer ul a:hover { color: white; }
+    .footer-bottom {
+      background: #0f2333;
+      padding: 1.2rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      font-size: 0.8rem; color: rgba(255,255,255,0.4);
+    }
+
+    /* ── MOBILE ── */
+    @media(max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 2.5rem 1.2rem; min-height: auto; gap: 2rem; }
+      .hero-visual { display: none; }
+      .mental-layout { grid-template-columns: 1fr; gap: 2rem; }
+      footer { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .crisis-banner { flex-direction: column; text-align: center; }
+      .crisis-btn { margin: 0 auto; }
+      .coping-grid { grid-template-columns: 1fr; }
+    }
+    @media(max-width: 480px) {
+      footer { grid-template-columns: 1fr; }
+      section { padding: 3rem 1.2rem; }
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4); z-index: 999;
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: white; border-radius: var(--radius);
+      max-width: 500px; width: 100%; padding: 2.5rem;
+      position: relative; animation: fadeUp .3s ease both;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none;
+      font-size: 1.4rem; cursor: pointer; color: var(--muted);
+    }
+    .modal h3 { font-family: 'Fraunces', serif; font-size: 1.4rem; color: var(--warm); margin-bottom: 1rem; }
+    .modal p  { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: .8rem; }
+    .modal .tag {
+      display: inline-block; background: var(--mint);
+      color: var(--sage); padding: .2rem .7rem;
+      border-radius: 50px; font-size: 0.78rem; margin-bottom: 1rem;
+    }
+
+    /* accordion */
+    details { border-radius: 12px; overflow: hidden; margin-bottom: .8rem; }
+    summary {
+      background: #eef4fa; padding: 1rem 1.2rem;
+      font-weight: 500; cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-size: 1.2rem; color: var(--sage); }
+    details[open] summary::after { content: '−'; }
+    details .acc-body {
+      background: white; padding: 1rem 1.2rem;
+      font-size: 0.9rem; color: var(--muted); line-height: 1.7;
+    }
+
+    /* ── AFFIRMATION BUTTON ── */
+    .affirmation-fab {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      background: var(--sage); color: white;
+      border: none; border-radius: 50px;
+      padding: .75rem 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(74,144,196,0.45);
+      display: flex; align-items: center; gap: .5rem;
+      transition: transform .2s, box-shadow .2s, background .2s;
+      animation: fabPop .6s cubic-bezier(.34,1.56,.64,1) 1s both;
+    }
+    @keyframes fabPop {
+      from { opacity: 0; transform: scale(0.6) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .affirmation-fab:hover {
+      background: #3a7db0;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(74,144,196,0.55);
+    }
+    .affirmation-fab:active { transform: scale(0.96); }
+    .fab-icon { font-size: 1.1rem; animation: heartbeat 2s ease-in-out infinite; }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      30%       { transform: scale(1.25); }
+      60%       { transform: scale(1.1); }
+    }
+    .affirm-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(26,58,82,0.35);
+      backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .affirm-overlay.open { display: flex; }
+    .affirm-card {
+      background: white; border-radius: 28px;
+      padding: 3rem 2.5rem; max-width: 440px; width: 100%;
+      text-align: center; position: relative;
+      box-shadow: 0 24px 60px rgba(26,58,82,0.2);
+      animation: affirmIn .4s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes affirmIn {
+      from { opacity: 0; transform: scale(0.8) translateY(30px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .affirm-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; font-size: 1.3rem;
+      cursor: pointer; color: var(--muted);
+    }
+    .affirm-emoji { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+    .affirm-label {
+      font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--sage); margin-bottom: .8rem;
+    }
+    .affirm-text {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.3rem, 4vw, 1.7rem);
+      font-style: italic; color: var(--warm);
+      line-height: 1.4; margin-bottom: 2rem;
+    }
+    .affirm-next {
+      background: var(--mint); color: var(--sage);
+      border: none; border-radius: 50px;
+      padding: .7rem 1.8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: background .2s, transform .15s;
+      margin-right: .6rem;
+    }
+    .affirm-next:hover { background: #b8d8f0; transform: translateY(-1px); }
+    .affirm-save {
+      background: none; color: var(--muted);
+      border: 2px solid #e0eaf4; border-radius: 50px;
+      padding: .7rem 1.4rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 500;
+      cursor: pointer; transition: all .2s;
+    }
+    .affirm-save:hover { border-color: var(--sage); color: var(--sage); }
+    .affirm-save.saved { background: var(--sage); color: white; border-color: var(--sage); }
+    .affirm-counter { margin-top: 1.5rem; font-size: 0.75rem; color: #aac0d0; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Thrive<span>.</span></span>
+  <ul class="nav-links">
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#mental">Mental Health</a></li>
+    <li><a href="#body">Body Basics</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('resources').scrollIntoView({behavior:'smooth'})">Get Help</button>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker">
+    <span class="ticker-item">🌱 You are not alone</span><span class="ticker-dot"></span>
+    <span class="ticker-item">💙 Your feelings are valid</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🛌 Sleep matters more than you think</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🍎 Small habits = big changes</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🧠 Mental health is health</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🤝 Asking for help is brave</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🌊 Breathe. You've got this.</span><span class="ticker-dot"></span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">🌱 You are not alone</span><span class="ticker-dot"></span>
+    <span class="ticker-item">💙 Your feelings are valid</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🛌 Sleep matters more than you think</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🍎 Small habits = big changes</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🧠 Mental health is health</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🤝 Asking for help is brave</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🌊 Breathe. You've got this.</span><span class="ticker-dot"></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Your guide to feeling your best</div>
+    <h1>Health info made <em>for you</em>, not at you.</h1>
+    <p class="hero-sub">Real talk about your body and mind — no jargon, no judgment. Just the info you need to understand yourself and thrive.</p>
+    <div class="hero-btns">
+      <a href="#topics" class="btn-primary">Explore Topics</a>
+      <a href="#resources" class="btn-secondary">Need Help Now?</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="hcard">
+        <div class="hcard-icon">🧠</div>
+        <div class="hcard-label">Mental Health</div>
+        <div class="hcard-title">Understanding your emotions</div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-icon">💪</div>
+        <div class="hcard-label">Physical Health</div>
+        <div class="hcard-title">How your body grows & changes</div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-icon">🌿</div>
+        <div class="hcard-label">Coping Strategies</div>
+        <div class="hcard-title">Tools for tough moments</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section id="topics">
+  <div class="section-label">What's on your mind?</div>
+  <h2>Browse by Topic</h2>
+  <p class="section-sub">Click any topic to learn more — everything here is designed to be easy to read and actually useful.</p>
+  <div class="topics-grid">
+    <div class="topic-card tc-physical reveal" onclick="openModal('physical')">
+      <div class="topic-icon">💪</div>
+      <h3>Physical Health</h3>
+      <p>Puberty, nutrition, exercise, sleep — understand what's happening to your body and why it matters.</p>
+    </div>
+    <div class="topic-card tc-mental reveal" onclick="openModal('mental-topic')">
+      <div class="topic-icon">🧠</div>
+      <h3>Mental Health</h3>
+      <p>Anxiety, depression, stress — learn to recognize the signs and find out you're not alone in feeling this way.</p>
+    </div>
+    <div class="topic-card tc-coping reveal" onclick="openModal('coping-topic')">
+      <div class="topic-icon">🌿</div>
+      <h3>Coping Strategies</h3>
+      <p>Breathing exercises, journaling, grounding techniques — real tools that help when things feel overwhelming.</p>
+    </div>
+    <div class="topic-card tc-sleep reveal" onclick="openModal('sleep')">
+      <div class="topic-icon">🌙</div>
+      <h3>Sleep & Rest</h3>
+      <p>Why teens need 8–10 hours, how sleep affects your mood, and tips to actually fall asleep.</p>
+    </div>
+    <div class="topic-card tc-nutrition reveal" onclick="openModal('nutrition')">
+      <div class="topic-icon">🍎</div>
+      <h3>Nutrition & Food</h3>
+      <p>Fuel your brain and body. No diet culture here — just honest info about what food does for you.</p>
+    </div>
+    <div class="topic-card tc-social reveal" onclick="openModal('social')">
+      <div class="topic-icon">🤝</div>
+      <h3>Social & Relationships</h3>
+      <p>Friends, family, online life — how relationships affect your wellbeing and what healthy ones look like.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MENTAL HEALTH -->
+<section id="mental">
+  <div class="section-label">Mental Health</div>
+  <h2>Your Mind Matters</h2>
+  <p class="section-sub">Mental health is just as real as physical health. Here's what you need to know.</p>
+  <div class="mental-layout">
+    <div>
+      <div class="mental-facts">
+        <div class="fact-card reveal" onclick="openModal('anxiety')">
+          <h4>What is anxiety?</h4>
+          <p>Anxiety is your body's natural alarm system — it's normal to feel it before a test or big event. But when worry feels constant and uncontrollable, it might be an anxiety disorder. About 1 in 3 teens experience this at some point.</p>
+        </div>
+        <div class="fact-card peach reveal" onclick="openModal('depression')">
+          <h4>Signs of depression in teens</h4>
+          <p>More than just feeling sad — depression can look like irritability, losing interest in things you used to enjoy, low energy, trouble concentrating, or changes in sleep and appetite. It's treatable and you deserve support.</p>
+        </div>
+        <div class="fact-card sky reveal" onclick="openModal('stress')">
+          <h4>Stress vs. burnout</h4>
+          <p>Stress is temporary pressure that eases when the problem goes away. Burnout is when you've been running on empty for too long — you feel exhausted, detached, and like nothing matters. Both are real and valid.</p>
+        </div>
+        <div class="fact-card lav reveal" onclick="openModal('talkhelp')">
+          <h4>When to talk to someone</h4>
+          <p>If your feelings are interfering with school, friendships, or daily life for more than two weeks — talk to a trusted adult, school counselor, or doctor. You don't have to hit a "low enough" point to deserve help.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;color:var(--warm);margin-bottom:1.2rem;">Coping Strategies That Work</h3>
+      <div class="coping-grid">
+        <div class="coping-chip reveal" onclick="openModal('box-breathing')"><span class="chip-icon">🌬️</span>Box Breathing</div>
+        <div class="coping-chip reveal" onclick="openModal('journaling')"><span class="chip-icon">📓</span>Journaling</div>
+        <div class="coping-chip reveal" onclick="openModal('music')"><span class="chip-icon">🎵</span>Music & Playlists</div>
+        <div class="coping-chip reveal" onclick="openModal('walk')"><span class="chip-icon">🚶</span>Walk Outside</div>
+        <div class="coping-chip reveal" onclick="openModal('creative')"><span class="chip-icon">🎨</span>Creative Outlet</div>
+        <div class="coping-chip reveal" onclick="openModal('talk-friend')"><span class="chip-icon">💬</span>Talk to a Friend</div>
+        <div class="coping-chip reveal" onclick="openModal('detox')"><span class="chip-icon">📵</span>Digital Detox</div>
+        <div class="coping-chip reveal" onclick="openModal('sleep-tip')"><span class="chip-icon">😴</span>Prioritize Sleep</div>
+      </div>
+      <div style="margin-top:2rem;">
+        <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;color:var(--warm);margin-bottom:1rem;">Common Questions</h3>
+        <details class="reveal">
+          <summary>Is it normal to feel anxious all the time as a teen?</summary>
+          <div class="acc-body">Some anxiety is totally normal — teen years are full of big changes. But if worry is constant, stops you from doing things you want to do, or causes physical symptoms like headaches or stomachaches regularly, it's worth talking to someone about it.</div>
+        </details>
+        <details class="reveal">
+          <summary>How do I tell someone I'm struggling?</summary>
+          <div class="acc-body">You don't need to have the "perfect" words. You could start with: "I've been having a hard time lately and I don't really know how to explain it, but I wanted to tell you." A trusted adult — parent, teacher, or school counselor — will take it from there.</div>
+        </details>
+        <details class="reveal">
+          <summary>What if no one believes me?</summary>
+          <div class="acc-body">If the first person you tell dismisses you, try someone else. You can also call or text a crisis line (see Resources below) where trained counselors will always take you seriously. Your feelings are real and you deserve to be heard.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY BASICS -->
+<section id="body">
+  <div class="section-label">Physical Health</div>
+  <h2>Your Body, Explained</h2>
+  <p class="section-sub">Bodies change a lot during the teen years. Here's a calm, factual guide to what's going on.</p>
+  <div class="body-cards">
+    <div class="body-card reveal" onclick="openModal('puberty')">
+      <div class="b-icon">🌱</div>
+      <h3>Puberty & Growth</h3>
+      <p>Hormones drive major changes in your body between ages 8–18. Everyone's timeline is different — early, late, or in between is all normal.</p>
+      <span class="b-pill">Ages 8–18</span>
+    </div>
+    <div class="body-card reveal" onclick="openModal('sleep-science')">
+      <div class="b-icon">🛌</div>
+      <h3>Sleep Science</h3>
+      <p>Teens biologically shift to staying up later and sleeping later. You need 8–10 hours. Sleep affects mood, memory, metabolism, and growth.</p>
+      <span class="b-pill">8–10 hrs/night</span>
+    </div>
+    <div class="body-card reveal" onclick="openModal('nutrition-body')">
+      <div class="b-icon">🍽️</div>
+      <h3>Nutrition Basics</h3>
+      <p>Your brain and body need carbs, protein, fats, vitamins, and minerals. Skipping meals hurts focus and mood. No food is inherently "bad."</p>
+      <span class="b-pill">Fuel up</span>
+    </div>
+    <div class="body-card reveal" onclick="openModal('exercise')">
+      <div class="b-icon">🏃</div>
+      <h3>Exercise & Movement</h3>
+      <p>60 minutes of movement a day is the guideline — but even 20 minutes of walking boosts mood, focus, and sleep quality significantly.</p>
+      <span class="b-pill">60 min/day</span>
+    </div>
+    <div class="body-card reveal" onclick="openModal('hydration')">
+      <div class="b-icon">💧</div>
+      <h3>Hydration</h3>
+      <p>Even mild dehydration causes headaches, trouble focusing, and fatigue. Aim for about 8 cups of water a day — more if you're active.</p>
+      <span class="b-pill">8 cups/day</span>
+    </div>
+    <div class="body-card reveal" onclick="openModal('checkups')">
+      <div class="b-icon">🩺</div>
+      <h3>Check-ups Matter</h3>
+      <p>Annual check-ups catch things early. Don't avoid doctors — they're on your side. You can also ask to speak to them privately.</p>
+      <span class="b-pill">Once a year</span>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-label">Get Support</div>
+  <h2>You Don't Have to Figure It Out Alone</h2>
+  <p class="section-sub">Whether you need someone to talk to right now or just want to learn more, these resources are here for you.</p>
+
+  <div class="crisis-banner reveal">
+    <div class="crisis-icon">🆘</div>
+    <div class="crisis-text">
+      <h3>If you're in crisis right now</h3>
+      <p>Please reach out immediately. You can call or text — it's confidential, it's free, and real people are there 24/7 to help.</p>
+    </div>
+    <a href="tel:988" class="crisis-btn">Call or Text 988</a>
+  </div>
+
+  <div class="resources-grid">
+    <div class="resource-card reveal" onclick="openModal('res-988')" style="cursor:pointer">
+      <div class="r-badge">📞 Crisis Line</div>
+      <h3>988 Suicide & Crisis Lifeline</h3>
+      <p>Call or text 988 anytime. Available 24/7 for anyone in emotional distress or mental health crisis. Confidential and free.</p>
+      <span class="r-link">Learn more →</span>
+    </div>
+    <div class="resource-card reveal" onclick="openModal('res-crisistxt')" style="cursor:pointer">
+      <div class="r-badge">💬 Text Line</div>
+      <h3>Crisis Text Line</h3>
+      <p>Text HOME to 741741 to connect with a trained crisis counselor. 100% free, available 24/7, and completely confidential.</p>
+      <span class="r-link">Learn more →</span>
+    </div>
+    <div class="resource-card reveal" onclick="openModal('res-teenline')" style="cursor:pointer">
+      <div class="r-badge">🌐 Online</div>
+      <h3>Teen Line</h3>
+      <p>A peer support line run by teens, for teens. Talk to someone your age who gets it. Available evenings via call, text, or chat.</p>
+      <span class="r-link">Learn more →</span>
+    </div>
+    <div class="resource-card reveal" onclick="openModal('res-counselor')" style="cursor:pointer">
+      <div class="r-badge">🏫 School</div>
+      <h3>Your School Counselor</h3>
+      <p>School counselors are trained to help with mental health, stress, family problems, and more. You can walk in — no appointment needed at most schools.</p>
+      <span class="r-link">Learn more →</span>
+    </div>
+    <div class="resource-card reveal" onclick="openModal('res-nami')" style="cursor:pointer">
+      <div class="r-badge">🧠 Learn More</div>
+      <h3>NAMI Teen & Young Adult</h3>
+      <p>The National Alliance on Mental Illness has a section dedicated to young people — tons of info, stories, and ways to find local support.</p>
+      <span class="r-link">Learn more →</span>
+    </div>
+    <div class="resource-card reveal" onclick="openModal('res-neda')" style="cursor:pointer">
+      <div class="r-badge">❤️ Body Image</div>
+      <h3>National Eating Disorders</h3>
+      <p>If you're struggling with your relationship with food or your body, reach out. Helpline: 1-800-931-2237. Chat also available.</p>
+      <span class="r-link">Learn more →</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="nav-logo">Thrive<span style="color:#7ab8e0">.</span></span>
+    <p>A calm, judgment-free space for teens to learn about their health and find support. You deserve to thrive.</p>
+  </div>
+  <div>
+    <h4>Topics</h4>
+    <ul>
+      <li><a href="#topics">Physical Health</a></li>
+      <li><a href="#mental">Mental Health</a></li>
+      <li><a href="#body">Body Basics</a></li>
+      <li><a href="#topics">Coping Tools</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Support</h4>
+    <ul>
+      <li><a href="tel:988">Call 988</a></li>
+      <li><a href="sms:741741&body=HOME">Crisis Text Line</a></li>
+      <li><a href="https://teenline.org" target="_blank">Teen Line</a></li>
+      <li><a href="#resources">All Resources</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>About</h4>
+    <ul>
+      <li><a href="#">Our Mission</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Disclaimer</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 Thrive — Teen Health & Wellness</span>
+  <span>This site provides general health information only. Always consult a healthcare professional for personal medical advice.</span>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+  const modals = {
+    physical: {
+      tag: '💪 Physical Health',
+      title: 'Physical Health During Teen Years',
+      body: `<p>Your body goes through more changes between ages 12 and 18 than almost any other time in your life. Puberty brings growth spurts, hormonal shifts, changes in skin, hair, and body composition — and all of it is normal.</p>
+      <p>🌱 <strong>Everyone's timeline is different.</strong> Starting puberty earlier or later than your friends doesn't mean anything is wrong with you.</p>
+      <p>🏃 <strong>Exercise isn't punishment.</strong> Moving your body should feel good, not like a chore. Find activities you actually enjoy.</p>
+      <p>🍎 <strong>Fuel, don't restrict.</strong> Your growing body needs more calories and nutrients than an adult's. Skipping meals affects your mood, focus, and energy.</p>
+      <p>🩺 <strong>Annual check-ups matter.</strong> A doctor visit once a year can catch things early and give you a private space to ask questions.</p>`
+    },
+    'mental-topic': {
+      tag: '🧠 Mental Health',
+      title: 'Mental Health: The Basics',
+      body: `<p>Mental health includes your emotional, psychological, and social wellbeing. It affects how you think, feel, and act — and it's just as important as your physical health.</p>
+      <p>😰 <strong>Anxiety disorders</strong> — Persistent worry, fear, or nervousness that interferes with daily life. The most common mental health condition in teens.</p>
+      <p>😔 <strong>Depression</strong> — More than sadness. Persistent low mood, loss of interest, fatigue, and changes in sleep/appetite that last more than two weeks.</p>
+      <p>😤 <strong>Stress & burnout</strong> — Normal stress becomes a problem when it's constant and overwhelming. Burnout is what happens when you push too hard for too long.</p>
+      <p>💡 <strong>The good news:</strong> All of these are treatable. Therapy, support from trusted adults, and self-care strategies can make a big difference.</p>`
+    },
+    'coping-topic': {
+      tag: '🌿 Coping Strategies',
+      title: 'Coping Tools That Actually Help',
+      body: `<p>Coping strategies are skills you practice so they're ready when you need them. Here are some evidence-based ones that work for a lot of teens:</p>
+      <p>🌬️ <strong>Box breathing:</strong> Inhale 4 counts, hold 4, exhale 4, hold 4. Repeat. This activates your body's calm response.</p>
+      <p>📓 <strong>Journaling:</strong> Writing down what you're feeling — even just for 5 minutes — helps your brain process emotions.</p>
+      <p>🚶 <strong>Get outside:</strong> Even a 10-minute walk can break a negative thought spiral. Nature specifically lowers cortisol (the stress hormone).</p>
+      <p>🎵 <strong>Music:</strong> Create playlists for different moods. Music is one of the fastest ways to shift your emotional state.</p>
+      <p>📵 <strong>Screen breaks:</strong> Social media can intensify anxiety and comparison. Try setting app timers or a "no phone after 9pm" rule.</p>
+      <p>💬 <strong>Talk it out:</strong> Talking to a friend, adult, or counselor is one of the most effective ways to reduce distress.</p>`
+    },
+    sleep: {
+      tag: '🌙 Sleep',
+      title: 'Sleep & Teens: What You Need to Know',
+      body: `<p>Sleep isn't laziness — it's when your brain consolidates memories, your body repairs itself, and your hormones regulate. Teens biologically need more sleep than adults.</p>
+      <p>📊 <strong>How much is enough?</strong> The American Academy of Sleep Medicine recommends 8–10 hours per night for teens aged 13–18.</p>
+      <p>🕐 <strong>Why teens stay up late:</strong> Puberty shifts your circadian rhythm (internal clock) later by 1–2 hours. This is biological, not laziness.</p>
+      <p>😴 <strong>What happens with poor sleep:</strong> Irritability, difficulty concentrating, poor memory, weakened immune system, increased anxiety and depression risk.</p>
+      <p>💡 <strong>Tips that help:</strong> Keep a consistent wake time, avoid screens 30–60 min before bed, keep your room cool and dark, avoid caffeine after 2pm.</p>`
+    },
+    nutrition: {
+      tag: '🍎 Nutrition',
+      title: 'Eating to Feel Good — No Diet Culture Here',
+      body: `<p>Food is fuel — for your brain, your mood, your energy, and your growth. Teen bodies need more of it, not less.</p>
+      <p>🧠 <strong>Your brain runs on glucose:</strong> Skipping breakfast literally slows your thinking. A balanced breakfast improves memory, attention, and mood all morning.</p>
+      <p>🥗 <strong>What a balanced day looks like:</strong> Mix of carbohydrates (energy), proteins (growth and repair), healthy fats (brain function), and plenty of fruits and vegetables.</p>
+      <p>⚠️ <strong>Watch out for diet culture:</strong> "Clean eating," extreme restriction, and obsessing over calories are not healthy — they're signs of disordered eating.</p>
+      <p>🩺 <strong>If food feels complicated:</strong> Reach out to the National Eating Disorders helpline: 1-800-931-2237.</p>`
+    },
+    social: {
+      tag: '🤝 Relationships',
+      title: 'Relationships & Social Health',
+      body: `<p>The quality of your relationships is one of the biggest factors in your mental health. Here's how to think about the social side of being a teen.</p>
+      <p>✅ <strong>What healthy relationships look like:</strong> Mutual respect, honesty, support, healthy conflict resolution, and feeling safe to be yourself.</p>
+      <p>🚩 <strong>Red flags in any relationship:</strong> Control, manipulation, constant criticism, pressure to do things you're uncomfortable with, or fear of their reaction.</p>
+      <p>📱 <strong>Social media and mental health:</strong> Research consistently shows that passive scrolling lowers mood. Active connecting has more positive effects.</p>
+      <p>😔 <strong>Loneliness is really common in teens.</strong> It can help to join a club, team, or group based on something you're already interested in.</p>`
+    },
+
+    // Mental Health fact cards
+    anxiety: {
+      tag: '😰 Anxiety',
+      title: 'Understanding Anxiety',
+      body: `<p>Anxiety is your body's built-in alarm system — designed to protect you from danger. When you feel nervous before a test or a big event, that's normal anxiety doing its job.</p>
+      <p><strong>When anxiety becomes a problem:</strong> If the worry feels constant, out of proportion, or stops you from doing things you want to do — like going to school, spending time with friends, or sleeping — it may be an anxiety disorder.</p>
+      <p>📊 <strong>How common is it?</strong> Anxiety is the most common mental health condition in teens. About 1 in 3 teens will experience it at some point. You are far from alone.</p>
+      <p><strong>Common symptoms:</strong> Racing thoughts, fast heartbeat, sweating, stomach aches, avoiding situations, difficulty concentrating, or feeling like something bad is about to happen.</p>
+      <p>💙 <strong>What helps:</strong> Deep breathing, grounding exercises, talking to a trusted person, therapy (especially CBT), and sometimes medication. It's treatable — please reach out for support.</p>`
+    },
+    depression: {
+      tag: '😔 Depression',
+      title: 'Depression in Teens',
+      body: `<p>Depression is more than feeling sad for a day or two. It's a persistent low mood that affects how you think, feel, and function — and it has real physical symptoms too.</p>
+      <p><strong>Signs to look for:</strong></p>
+      <p>• Feeling sad, empty, or hopeless most of the day<br>• Losing interest in things you used to enjoy<br>• Low energy or feeling slowed down<br>• Trouble sleeping or sleeping too much<br>• Changes in appetite or weight<br>• Difficulty concentrating or making decisions<br>• Feeling worthless or guilty<br>• In serious cases, thoughts of death or self-harm</p>
+      <p>⚠️ <strong>Note:</strong> In teens, depression often shows up as irritability rather than sadness. If you've been feeling irritable, withdrawn, or unlike yourself for weeks — that counts too.</p>
+      <p>💙 <strong>Depression is treatable.</strong> Therapy, support, and sometimes medication can make a huge difference. You deserve help. Call or text 988 if you need support right now.</p>`
+    },
+    stress: {
+      tag: '😤 Stress & Burnout',
+      title: 'Stress vs. Burnout: What\'s the Difference?',
+      body: `<p><strong>Stress</strong> is temporary. It usually has a clear cause (a test, a fight with a friend, a deadline) and eases once the situation is over. Some stress is actually helpful — it motivates you to act.</p>
+      <p><strong>Burnout</strong> is different. It happens when stress piles up without enough recovery. Signs of burnout include:</p>
+      <p>• Feeling emotionally exhausted all the time<br>• Losing motivation even for things you normally care about<br>• Feeling detached, cynical, or like nothing matters<br>• Physical symptoms: headaches, getting sick often, trouble sleeping<br>• Declining performance at school or work despite trying harder</p>
+      <p>💡 <strong>What helps with burnout:</strong> Rest (real rest, not just scrolling), setting limits on commitments, talking to someone, and giving yourself permission to do less for a while.</p>
+      <p>🌱 <strong>Recovery takes time.</strong> If you're burned out, you can't just push through. You need to actually slow down — and that's not weakness, it's wisdom.</p>`
+    },
+    talkhelp: {
+      tag: '🤝 Getting Help',
+      title: 'When & How to Ask for Help',
+      body: `<p>You don't have to reach a "crisis point" to deserve support. If your mental health is interfering with your daily life, that's reason enough to reach out.</p>
+      <p><strong>Signs it's time to talk to someone:</strong><br>• Struggling for more than 2 weeks<br>• It's affecting school, friendships, or sleep<br>• You're using unhealthy ways to cope<br>• You feel like nobody would understand<br>• You're having thoughts of harming yourself</p>
+      <p><strong>Who you can talk to:</strong><br>• A parent or trusted family member<br>• A school counselor (confidential in most cases)<br>• Your doctor or pediatrician<br>• A therapist or psychologist<br>• A crisis line (988 or text HOME to 741741)</p>
+      <p>💬 <strong>How to start the conversation:</strong> You don't need perfect words. Try: <em>"I've been struggling lately and I don't know how to explain it, but I wanted to tell someone."</em></p>
+      <p>💙 Asking for help is one of the strongest things you can do.</p>`
+    },
+
+    // Coping chips
+    'box-breathing': {
+      tag: '🌬️ Breathing',
+      title: 'Box Breathing: How To Do It',
+      body: `<p>Box breathing is a simple technique used by athletes, therapists, and even the military to calm the nervous system quickly.</p>
+      <p><strong>How to do it:</strong></p>
+      <p>1️⃣ <strong>Inhale</strong> slowly through your nose for <strong>4 counts</strong><br>
+      2️⃣ <strong>Hold</strong> your breath for <strong>4 counts</strong><br>
+      3️⃣ <strong>Exhale</strong> slowly through your mouth for <strong>4 counts</strong><br>
+      4️⃣ <strong>Hold</strong> again for <strong>4 counts</strong><br>
+      🔁 <strong>Repeat</strong> 3–5 times</p>
+      <p><strong>Why it works:</strong> Slow, controlled breathing activates your parasympathetic nervous system — the "rest and digest" mode that counters your stress response. Within a few cycles, your heart rate slows and anxiety decreases.</p>
+      <p>💡 <strong>When to use it:</strong> Before a test, during an argument, when you're feeling overwhelmed, or any time you need to feel grounded quickly.</p>`
+    },
+    journaling: {
+      tag: '📓 Journaling',
+      title: 'Why Journaling Helps (And How to Start)',
+      body: `<p>You don't have to be a "writer" to benefit from journaling. Even messy, unfiltered writing helps your brain process emotions and reduce stress.</p>
+      <p><strong>Why it works:</strong> Writing activates the prefrontal cortex — the thinking, reasoning part of your brain — which helps regulate the emotional, reactive part. It's basically giving your feelings a place to land.</p>
+      <p><strong>Ways to journal:</strong><br>
+      📝 Free write — just dump whatever is in your head, no editing<br>
+      ❓ Prompts — "What am I feeling right now and why?" / "What went well today?"<br>
+      🙏 Gratitude — Write 3 things you noticed or appreciated today<br>
+      📊 Mood tracking — Rate your mood 1–10 and note what might have affected it</p>
+      <p><strong>How to start:</strong> Set a timer for 5 minutes. Write without stopping. Don't worry about grammar or making sense. Nobody has to read it — not even you.</p>
+      <p>💡 Paper journal, notes app, or a private document all work equally well.</p>`
+    },
+    music: {
+      tag: '🎵 Music',
+      title: 'Using Music to Regulate Your Mood',
+      body: `<p>Music is one of the fastest ways to shift your emotional state — and there's real science behind it.</p>
+      <p><strong>How music affects your brain:</strong> Music triggers the release of dopamine (the "feel good" chemical) and can lower cortisol (the stress hormone). Rhythm and melody sync with your nervous system, which is why a slow song can calm you and an upbeat one can energize you.</p>
+      <p><strong>Try building playlists for different needs:</strong><br>
+      😤 When you're frustrated — high energy music to release it<br>
+      😔 When you're sad — music that matches first, then lifts<br>
+      😰 When you're anxious — slow, instrumental, 60 BPM music<br>
+      📚 When you need to focus — lo-fi, classical, or ambient<br>
+      🌅 Morning routine — something that makes you feel ready</p>
+      <p>💡 <strong>Tip:</strong> When you're sad, listening to sad music first actually helps more than jumping straight to happy music — it feels validating before it lifts you.</p>`
+    },
+    walk: {
+      tag: '🚶 Movement',
+      title: 'Why a Walk Can Actually Help',
+      body: `<p>It sounds almost too simple — but walking, especially outside, is one of the most evidence-backed mood boosters available to you right now.</p>
+      <p><strong>What happens in your body when you walk:</strong><br>
+      • Releases endorphins and serotonin (natural mood elevators)<br>
+      • Lowers cortisol (stress hormone)<br>
+      • Increases blood flow to the brain, improving focus<br>
+      • Breaks the cycle of rumination (repetitive anxious thoughts)</p>
+      <p><strong>What happens if you walk outside:</strong> Natural light regulates your circadian rhythm and boosts vitamin D. Green spaces specifically lower anxiety and blood pressure. Even a parking lot is better than a screen.</p>
+      <p>⏱️ <strong>How long do you need?</strong> Research shows as little as 10 minutes can improve mood. 20–30 minutes is ideal. You don't need gear, a destination, or a plan.</p>
+      <p>💡 Leave your headphones behind sometimes — just noticing the world around you is a form of mindfulness.</p>`
+    },
+    creative: {
+      tag: '🎨 Creativity',
+      title: 'Creative Outlets for Stress Relief',
+      body: `<p>Making something — anything — gives your mind a different kind of focus. Creative activities shift your brain from worry mode into flow state, which is deeply restorative.</p>
+      <p><strong>You don't have to be "good" at it:</strong> The benefit comes from the process, not the product. A messy drawing still works. A song nobody hears still helps.</p>
+      <p><strong>Ideas to try:</strong><br>
+      🎨 Drawing, painting, doodling<br>
+      ✍️ Creative writing, poetry, song lyrics<br>
+      📸 Photography (your phone works)<br>
+      🧶 Knitting, crocheting, origami<br>
+      🎮 Game design, coding, building<br>
+      🍳 Cooking or baking<br>
+      💃 Dance, choreography, freestyle movement<br>
+      🎬 Video editing or short films</p>
+      <p>💡 <strong>Key principle:</strong> Pick something where you can lose track of time. That absorbed, focused state — called "flow" — is one of the most effective natural stress relievers known to psychology.</p>`
+    },
+    'talk-friend': {
+      tag: '💬 Connection',
+      title: 'Talking to a Friend When You\'re Struggling',
+      body: `<p>Human connection is one of the most powerful buffers against stress and mental health struggles. You were not designed to carry hard things alone.</p>
+      <p><strong>Why it helps:</strong> Being heard and understood activates the same brain pathways as physical comfort. It literally reduces pain and anxiety on a neurological level.</p>
+      <p><strong>How to bring it up:</strong><br>
+      💬 "Can I talk to you about something? I've been having a rough time."<br>
+      💬 "I don't need advice — I just need someone to listen."<br>
+      💬 "I'm not okay, and I think I need to say that out loud."</p>
+      <p><strong>What if you don't want to burden them?</strong> Real friends want to know. And the cost of staying silent is usually higher than the awkwardness of being honest.</p>
+      <p><strong>What if there's no one?</strong> Teen Line (teenline.org) connects you with teens who are trained to listen. You can also text HOME to 741741 for immediate support from a trained counselor.</p>`
+    },
+    detox: {
+      tag: '📵 Digital Detox',
+      title: 'Why Taking Breaks from Screens Helps',
+      body: `<p>Social media and constant connectivity have real effects on teen mental health — especially for anxiety, sleep, and self-esteem.</p>
+      <p><strong>What the research shows:</strong><br>
+      • Passive scrolling (watching others' highlight reels) consistently lowers mood<br>
+      • Social comparison on social media is linked to increased anxiety and depression<br>
+      • Blue light from screens suppresses melatonin, making it harder to fall asleep<br>
+      • Constant notifications keep your nervous system in a low-level alert state</p>
+      <p><strong>How to try a digital detox:</strong><br>
+      📵 Phone-free first 30 minutes after waking<br>
+      🛌 No phones in the bedroom after a certain time<br>
+      ⏱️ Set app limits on your most-used social media<br>
+      📅 One full offline hour per day<br>
+      🌿 "Nature mode" — go outside without your phone</p>
+      <p>💡 You don't have to quit entirely. Even small reductions in passive scrolling show measurable mood improvements within a week.</p>`
+    },
+    'sleep-tip': {
+      tag: '😴 Sleep',
+      title: 'How to Actually Prioritize Sleep',
+      body: `<p>You probably know sleep matters — but knowing and doing are different. Here's how to make it actually happen.</p>
+      <p><strong>The science in 30 seconds:</strong> During sleep your brain clears toxins, consolidates memories, regulates emotions, and releases growth hormone. Teens who sleep less than 8 hours have significantly higher rates of anxiety, depression, obesity, and poor academic performance.</p>
+      <p><strong>Practical sleep habits:</strong><br>
+      ⏰ <strong>Consistent wake time</strong> — even on weekends. This anchors your circadian rhythm.<br>
+      📵 <strong>No screens 30–60 minutes before bed</strong> — blue light delays melatonin<br>
+      🌡️ <strong>Cool, dark room</strong> — your body temperature needs to drop to fall asleep<br>
+      ☕ <strong>No caffeine after 2pm</strong> — caffeine has a 5–7 hour half-life<br>
+      📚 <strong>Wind-down routine</strong> — reading, stretching, or calm music signals sleep is coming</p>
+      <p>💡 If you can't fall asleep after 20 minutes, get up and do something quiet until you feel sleepy. Lying there anxious makes it worse.</p>`
+    },
+
+    // Body cards
+    puberty: {
+      tag: '🌱 Puberty',
+      title: 'Puberty & Growth: What to Expect',
+      body: `<p>Puberty is the biological process of your body maturing from a child's to an adult's. It's driven by hormones — mainly estrogen and testosterone — and happens to everyone, just on different timelines.</p>
+      <p><strong>Physical changes you might notice:</strong><br>
+      • Growth spurts (you might gain several inches in a year)<br>
+      • Body hair growth<br>
+      • Changes in body shape and composition<br>
+      • Skin changes (acne is extremely common)<br>
+      • Sweating more<br>
+      • Voice changes<br>
+      • Breast development or genital development</p>
+      <p>⏱️ <strong>Timeline:</strong> Puberty typically begins between ages 8–13 and completes by ages 14–18, but this varies a lot. Starting "early" or "late" compared to friends is almost always completely normal.</p>
+      <p>🧠 <strong>Emotional changes:</strong> Hormones affect your brain too — mood swings, stronger emotions, and new feelings are all part of it. This is biology, not a flaw.</p>
+      <p>💙 If anything feels very wrong or painful, talk to a doctor. They have heard it all and they're there to help.</p>`
+    },
+    'sleep-science': {
+      tag: '🛌 Sleep Science',
+      title: 'The Science of Teen Sleep',
+      body: `<p>Sleep isn't just rest — it's one of the most biologically active states your body enters. Here's what's actually happening when you sleep.</p>
+      <p><strong>What sleep does for you:</strong><br>
+      🧠 Memory consolidation — your brain sorts and stores what you learned<br>
+      💪 Muscle repair and growth — especially important during teen years<br>
+      🛡️ Immune function — poor sleep weakens your body's defenses<br>
+      😌 Emotional regulation — sleep-deprived brains are 60% more reactive<br>
+      📈 Growth hormone release — most of it happens during deep sleep</p>
+      <p><strong>Why teens specifically need more sleep:</strong> Your brain is undergoing its second biggest developmental phase (the first was ages 0–3). The prefrontal cortex — decision-making and emotional regulation — is still actively developing. Sleep is when this work happens.</p>
+      <p>😴 <strong>Recommended:</strong> 8–10 hours for ages 13–18. Most teens get 6–7. That gap has real consequences for mood, learning, and health.</p>`
+    },
+    'nutrition-body': {
+      tag: '🍽️ Nutrition',
+      title: 'Nutrition Basics for Teen Bodies',
+      body: `<p>Your body is doing extraordinary things right now — growing, developing a brain, building bone density that will matter your whole life. Nutrition fuels all of it.</p>
+      <p><strong>Key nutrients teens need:</strong><br>
+      🥩 <strong>Protein</strong> — muscle growth, enzymes, hormones (eggs, beans, meat, dairy, tofu)<br>
+      🥛 <strong>Calcium</strong> — bone density peaks in your teens (dairy, leafy greens, fortified foods)<br>
+      🥦 <strong>Iron</strong> — especially important, especially for those who menstruate (red meat, spinach, lentils)<br>
+      🐟 <strong>Omega-3 fats</strong> — critical for brain development (fish, walnuts, flaxseed)<br>
+      🌞 <strong>Vitamin D</strong> — bone health and mood (sunlight, fortified milk, supplements)</p>
+      <p><strong>Common mistakes to avoid:</strong><br>
+      ❌ Skipping breakfast — causes brain fog and mood crashes<br>
+      ❌ Extreme restriction — especially harmful during development<br>
+      ❌ Too much ultra-processed food — fine occasionally, not as a base</p>
+      <p>💙 There is no perfect diet. Mostly whole foods, regular meals, and eating when hungry is the foundation.</p>`
+    },
+    exercise: {
+      tag: '🏃 Exercise',
+      title: 'Movement & Exercise for Teens',
+      body: `<p>Exercise is one of the most powerful things you can do for your mental and physical health — and you don't need a gym, expensive gear, or an intense program.</p>
+      <p><strong>What movement does for you:</strong><br>
+      😊 Releases endorphins (natural mood boosters) and serotonin<br>
+      🧠 Improves focus, memory, and academic performance<br>
+      😴 Improves sleep quality significantly<br>
+      😰 Reduces anxiety and depression symptoms<br>
+      💪 Builds strength, coordination, and cardiovascular health</p>
+      <p>⏱️ <strong>The guideline:</strong> 60 minutes of moderate activity per day. But even 20 minutes makes a real difference. You don't have to do it all at once.</p>
+      <p><strong>What counts as movement:</strong> Walking, biking, dancing, swimming, sports, yoga, skateboarding, hiking, PE class — anything that gets your body moving and your heart rate up.</p>
+      <p>💡 <strong>The best exercise is the one you'll actually do.</strong> Find something you enjoy — or at least don't hate — and build from there.</p>`
+    },
+    hydration: {
+      tag: '💧 Hydration',
+      title: 'Why Staying Hydrated Matters More Than You Think',
+      body: `<p>Your body is about 60% water. Even mild dehydration — as little as 1–2% — has measurable effects on your brain and mood.</p>
+      <p><strong>Signs you might be dehydrated:</strong><br>
+      • Headache or brain fog<br>
+      • Trouble concentrating<br>
+      • Fatigue or low energy<br>
+      • Irritability or low mood<br>
+      • Dark yellow urine (pale yellow = well hydrated)</p>
+      <p>💧 <strong>How much do you need?</strong> About 8 cups (2 liters) per day as a baseline — more if you're active, it's hot, or you've been sick. Thirst is actually a late signal — by the time you're thirsty, you're already mildly dehydrated.</p>
+      <p><strong>Practical tips:</strong><br>
+      🍶 Carry a water bottle and refill it<br>
+      🌅 Drink a glass of water first thing in the morning<br>
+      🍉 Foods like cucumber, watermelon, and oranges also count<br>
+      ☕ Caffeine is mildly dehydrating — balance coffee/energy drinks with extra water</p>`
+    },
+    checkups: {
+      tag: '🩺 Healthcare',
+      title: 'Why Regular Check-Ups Matter',
+      body: `<p>A lot of teens avoid doctors unless something is obviously wrong. But annual check-ups catch things early — and they give you a private space to ask questions you might not ask anyone else.</p>
+      <p><strong>What happens at a teen check-up:</strong><br>
+      • Height, weight, blood pressure, vision and hearing screening<br>
+      • Vaccinations that protect you now and in the future<br>
+      • Discussion of nutrition, sleep, activity, and mental health<br>
+      • A private conversation with just you and the doctor (you can ask for this)</p>
+      <p>🔒 <strong>Confidentiality:</strong> In most places, you can speak privately with your doctor about mental health, substance use, and sexual health without your parents being told. Ask your doctor what their policy is.</p>
+      <p><strong>Questions you can ask your doctor:</strong><br>
+      💬 "I've been feeling really anxious lately — is that normal?"<br>
+      💬 "I'm not sleeping well. What can I do?"<br>
+      💬 "Is my body developing normally?"</p>
+      <p>💙 Doctors are on your side. There are no embarrassing questions — they've heard everything.</p>`
+    },
+
+    // Resources
+    'res-988': {
+      tag: '📞 Crisis Line',
+      title: '988 Suicide & Crisis Lifeline',
+      body: `<p>The 988 Suicide and Crisis Lifeline is a free, confidential service available 24 hours a day, 7 days a week for anyone experiencing emotional distress or a mental health crisis.</p>
+      <p><strong>How to reach them:</strong><br>
+      📞 <strong>Call or text: 988</strong><br>
+      💬 Chat available at 988lifeline.org</p>
+      <p><strong>Who it's for:</strong> Anyone in emotional distress — you don't have to be suicidal to call. Feeling overwhelmed, anxious, depressed, or like you can't cope are all valid reasons to reach out.</p>
+      <p><strong>What to expect:</strong> A trained counselor will answer, listen without judgment, and help you figure out next steps. Calls are confidential. There is no cost.</p>
+      <p>💙 You are not a burden. You deserve support. Please call or text 988 if you need help right now.</p>
+      <p><a href="tel:988" style="display:inline-block;margin-top:.5rem;background:#4a90c4;color:white;padding:.6rem 1.4rem;border-radius:50px;text-decoration:none;font-weight:600;">📞 Call or Text 988</a></p>`
+    },
+    'res-crisistxt': {
+      tag: '💬 Text Support',
+      title: 'Crisis Text Line',
+      body: `<p>Crisis Text Line connects you with a trained crisis counselor via text message — free, confidential, and available 24/7.</p>
+      <p><strong>How to reach them:</strong><br>
+      📱 <strong>Text HOME to 741741</strong></p>
+      <p><strong>Why texting might work for you:</strong> If calling feels too hard, too public, or too scary — texting is a great alternative. You can do it from anywhere, quietly, without anyone knowing.</p>
+      <p><strong>What happens:</strong> Within a few minutes, you'll be connected with a trained volunteer crisis counselor. They'll talk through what you're going through, help you feel less alone, and help you make a safety plan if needed.</p>
+      <p><strong>It's free.</strong> It works on any mobile phone. No data plan required in the US.</p>
+      <p><a href="sms:741741&body=HOME" style="display:inline-block;margin-top:.5rem;background:#4a90c4;color:white;padding:.6rem 1.4rem;border-radius:50px;text-decoration:none;font-weight:600;">💬 Text HOME to 741741</a></p>`
+    },
+    'res-teenline': {
+      tag: '🌐 Teen Support',
+      title: 'Teen Line — Teens Helping Teens',
+      body: `<p>Teen Line is a confidential helpline staffed by trained teen volunteers — people your age who have been through real training to support you.</p>
+      <p><strong>Why it's different:</strong> Sometimes it's easier to talk to someone who actually gets what it's like to be a teenager right now. Teen Line counselors are 13–19 years old and selected and trained carefully.</p>
+      <p><strong>How to reach them:</strong><br>
+      📞 <strong>Call: 1-800-852-8336</strong> (6pm–10pm PT nightly)<br>
+      📱 <strong>Text TEEN to 839863</strong> (6pm–9pm PT nightly)<br>
+      💻 <strong>Chat at teenline.org</strong></p>
+      <p><strong>What you can talk about:</strong> Anything — depression, anxiety, relationship problems, family issues, school stress, loneliness, identity, or just needing someone to talk to.</p>
+      <p><a href="https://teenline.org" target="_blank" style="display:inline-block;margin-top:.5rem;background:#4a90c4;color:white;padding:.6rem 1.4rem;border-radius:50px;text-decoration:none;font-weight:600;">🌐 Visit teenline.org</a></p>`
+    },
+    'res-counselor': {
+      tag: '🏫 School Support',
+      title: 'Your School Counselor',
+      body: `<p>Your school counselor is one of the most accessible mental health resources available to you — and they're already paid to help you.</p>
+      <p><strong>What school counselors can help with:</strong><br>
+      • Mental health struggles (anxiety, depression, stress)<br>
+      • Academic pressure and burnout<br>
+      • Family problems or home situations<br>
+      • Friendship or relationship issues<br>
+      • Bullying or social conflict<br>
+      • College and future planning<br>
+      • Connecting you to additional resources</p>
+      <p>🔒 <strong>Confidentiality:</strong> School counselors keep conversations private in most cases. They are required to tell someone if they believe you are in immediate danger — but talking about stress, anxiety, or struggles is confidential.</p>
+      <p><strong>How to access them:</strong> Walk in during a free period, ask your teacher for a pass, or email them to make an appointment. You don't need a specific reason or a crisis — "I've been having a hard time" is enough.</p>
+      <p>💙 You don't need to have everything figured out before you go. Just showing up is the hard part.</p>`
+    },
+    'res-nami': {
+      tag: '🧠 NAMI',
+      title: 'NAMI — National Alliance on Mental Illness',
+      body: `<p>NAMI is one of the largest mental health organizations in the United States, and they have a dedicated section for teens and young adults with tons of reliable information and support.</p>
+      <p><strong>What NAMI offers:</strong><br>
+      📚 Plain-language information about mental health conditions<br>
+      🗺️ A tool to find local mental health services near you<br>
+      👥 Peer support groups (including teen-specific ones)<br>
+      📞 NAMI Helpline: 1-800-950-6264 (Mon–Fri, 10am–10pm ET)<br>
+      💬 Text NAMI to 741741 for the Crisis Text Line</p>
+      <p><strong>NAMI is especially useful if:</strong><br>
+      • You want to understand a diagnosis (yours or a family member's)<br>
+      • You're looking for local therapists or support groups<br>
+      • You want to connect with others who understand what you're going through</p>
+      <p><a href="https://nami.org/Your-Journey/Teens-Young-Adults" target="_blank" style="display:inline-block;margin-top:.5rem;background:#4a90c4;color:white;padding:.6rem 1.4rem;border-radius:50px;text-decoration:none;font-weight:600;">🌐 Visit NAMI for Teens</a></p>`
+    },
+    'res-neda': {
+      tag: '❤️ Eating Disorders',
+      title: 'National Eating Disorders Support',
+      body: `<p>If you're struggling with your relationship with food, eating, or your body — you're not alone, and support is available.</p>
+      <p><strong>Eating disorders aren't just about food.</strong> They're often about control, emotions, trauma, or anxiety. They can affect anyone regardless of body size, gender, or background.</p>
+      <p><strong>Signs that support might help:</strong><br>
+      • Feeling intense guilt or fear around eating<br>
+      • Restricting food, bingeing, or purging<br>
+      • Obsessively thinking about food, calories, or body shape<br>
+      • Avoiding social situations involving food<br>
+      • Exercising compulsively to compensate for eating</p>
+      <p><strong>How to reach support:</strong><br>
+      📞 <strong>National Alliance for Eating Disorders Helpline: 1-866-662-1235</strong><br>
+      💬 Chat available at allianceforeatingdisorders.com<br>
+      🌐 <strong>nationaleatingdisorders.org</strong> for information and resources</p>
+      <p>💙 Recovery is possible. Please reach out — early support makes a real difference.</p>
+      <p><a href="https://www.nationaleatingdisorders.org" target="_blank" style="display:inline-block;margin-top:.5rem;background:#4a90c4;color:white;padding:.6rem 1.4rem;border-radius:50px;text-decoration:none;font-weight:600;">❤️ Get Support</a></p>`
+    }
+  };
+
+  function openModal(key) {
+    const m = modals[key];
+    if (!m) return;
+    document.getElementById('modal-content').innerHTML = `
+      <span class="tag">${m.tag}</span>
+      <h3>${m.title}</h3>
+      ${m.body}
+    `;
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modal')) {
+      document.getElementById('modal').classList.remove('open');
+    }
+  }
+
+  // scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<!-- AFFIRMATION FLOATING BUTTON -->
+<button class="affirmation-fab" onclick="openAffirmation()">
+  <span class="fab-icon">💙</span> Daily Affirmation
+</button>
+
+<!-- AFFIRMATION POPUP -->
+<div class="affirm-overlay" id="affirmOverlay" onclick="closeAffirmOverlay(event)">
+  <div class="affirm-card">
+    <button class="affirm-close" onclick="document.getElementById('affirmOverlay').classList.remove('open')">✕</button>
+    <span class="affirm-emoji" id="affirmEmoji">💙</span>
+    <div class="affirm-label">Your affirmation for today</div>
+    <div class="affirm-text" id="affirmText"></div>
+    <div>
+      <button class="affirm-next" onclick="nextAffirmation()">✨ Another one</button>
+      <button class="affirm-save" id="affirmSaveBtn" onclick="saveAffirmation()">🔖 Save this</button>
+    </div>
+    <div class="affirm-counter" id="affirmCounter"></div>
+  </div>
+</div>
+
+<script>
+  const affirmations = [
+    { text: "You are enough, exactly as you are right now.", emoji: "💙" },
+    { text: "Your feelings are valid, even when they're hard to explain.", emoji: "🌊" },
+    { text: "You have survived every difficult day so far — that's real strength.", emoji: "💪" },
+    { text: "It's okay to not have everything figured out. Nobody does at your age.", emoji: "🌱" },
+    { text: "You deserve kindness — especially from yourself.", emoji: "🤍" },
+    { text: "Asking for help is one of the bravest things you can do.", emoji: "🤝" },
+    { text: "Your worth is not measured by your grades, your body, or anyone's opinion.", emoji: "⭐" },
+    { text: "Rest is not laziness. Taking care of yourself is productive.", emoji: "🛌" },
+    { text: "The way you see yourself matters more than the way anyone else does.", emoji: "🪞" },
+    { text: "You are allowed to take up space in this world.", emoji: "🌍" },
+    { text: "Small progress is still progress. Keep going.", emoji: "🚶" },
+    { text: "You don't have to be positive all the time. That's what makes you human.", emoji: "🌤️" },
+    { text: "The hard parts of you are not flaws — they are depth.", emoji: "🌊" },
+    { text: "You matter to more people than you realize.", emoji: "💛" },
+    { text: "Today, being here is enough.", emoji: "🌸" },
+    { text: "Your story isn't over. The best chapters are still ahead.", emoji: "📖" },
+    { text: "You are not behind. Everyone moves at their own pace.", emoji: "🌿" },
+    { text: "It's okay to feel scared and do it anyway.", emoji: "🦋" },
+    { text: "You bring something to the world that nobody else can.", emoji: "✨" },
+    { text: "Every day you try is a day worth celebrating.", emoji: "🎉" },
+  ];
+
+  let currentIndex = -1;
+  let savedAffirmations = [];
+
+  function getRandomIndex() {
+    let idx;
+    do { idx = Math.floor(Math.random() * affirmations.length); }
+    while (idx === currentIndex && affirmations.length > 1);
+    return idx;
+  }
+
+  function showAffirmation(idx) {
+    currentIndex = idx;
+    const a = affirmations[idx];
+    const emojiEl = document.getElementById('affirmEmoji');
+    const textEl  = document.getElementById('affirmText');
+    const saveBtn = document.getElementById('affirmSaveBtn');
+    const counter = document.getElementById('affirmCounter');
+
+    // animate out then in
+    textEl.style.opacity = '0';
+    textEl.style.transform = 'translateY(10px)';
+    emojiEl.style.opacity = '0';
+    setTimeout(() => {
+      emojiEl.textContent = a.emoji;
+      textEl.textContent  = a.text;
+      textEl.style.transition = 'opacity .35s ease, transform .35s ease';
+      emojiEl.style.transition = 'opacity .35s ease';
+      textEl.style.opacity = '1';
+      textEl.style.transform = 'translateY(0)';
+      emojiEl.style.opacity = '1';
+    }, 180);
+
+    saveBtn.textContent = '🔖 Save this';
+    saveBtn.classList.remove('saved');
+    counter.textContent = savedAffirmations.length > 0
+      ? `💾 ${savedAffirmations.length} affirmation${savedAffirmations.length > 1 ? 's' : ''} saved`
+      : '';
+  }
+
+  function openAffirmation() {
+    document.getElementById('affirmOverlay').classList.add('open');
+    showAffirmation(getRandomIndex());
+  }
+
+  function nextAffirmation() { showAffirmation(getRandomIndex()); }
+
+  function saveAffirmation() {
+    const btn = document.getElementById('affirmSaveBtn');
+    const text = affirmations[currentIndex].text;
+    if (!savedAffirmations.includes(text)) {
+      savedAffirmations.push(text);
+      btn.textContent = '✅ Saved!';
+      btn.classList.add('saved');
+      document.getElementById('affirmCounter').textContent =
+        `💾 ${savedAffirmations.length} affirmation${savedAffirmations.length > 1 ? 's' : ''} saved`;
+    }
+  }
+
+  function closeAffirmOverlay(e) {
+    if (e.target === document.getElementById('affirmOverlay'))
+      document.getElementById('affirmOverlay').classList.remove('open');
+  }
+
+  // Auto-show on page load after a short delay
+  window.addEventListener('load', () => {
+    setTimeout(openAffirmation, 1800);
+  });
+</script>
+
+</body>
+</html>
